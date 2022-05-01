@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: letsencrypt-prod
+  name: ingress-demo-nip-io-tls
+  namespace: my-wp
+spec:
+  rules:
+  - host: demo.ca1ce654.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: demo101-rancher-demo
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - demo.ca1ce654.nip.io
+    secretName: demo-ca1ce654-nip-io-tls

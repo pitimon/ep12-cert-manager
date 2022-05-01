@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.citrix.com/insecure-port: "53"
+    ingress.citrix.com/insecure-service-type: "udp"
+  name: udp-ingress
+  namespace: unbound
+spec:
+  defaultBackend:
+    service:
+      name: unbound
+      port:
+        number: 53

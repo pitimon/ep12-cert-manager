@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: letsencrypt-prod
+  name: ingress-demotrust-4-tls
+  namespace: my-wp
+spec:
+  rules:
+  - host: demotrust.4.ipv9.xyz
+    http:
+      paths:
+      - backend:
+          service:
+            name: demo101-rancher-demo
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - demotrust.4.ipv9.xyz
+    secretName: demotrust-4-ipv9-xyz-tls
